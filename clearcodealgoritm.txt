@@ -1,0 +1,34 @@
+with open('final_dataset.txt', 'r', encoding='utf-8') as file:
+    lines = file.readlines()
+
+cleaned_lines = []
+question = ''
+answer = ''
+
+for line in lines:
+    line = line.strip()
+    if line.endswith('?'):
+        # Если строка заканчивается на "?", то это вопрос
+        if question and answer:
+            cleaned_lines.append(f'{question}\n{answer}\n')
+        question = line
+        answer = ''
+    elif line == '':
+        # Если строка пустая, добавляем вопрос и ответ, если они есть
+        if question and answer:
+            cleaned_lines.append(f'{question}\n{answer}\n')
+        question = ''
+        answer = ''
+    else:
+        # Все остальное считаем ответом и убираем начальное тире
+        answer += line
+        if '\n' in answer:
+            answer = answer.split('\n', 1)[0]
+        answer += '\n'
+
+
+if question and answer:
+    cleaned_lines.append(f'- {question}\n- {answer}\n')
+
+with open('cleaned_dataset.txt', 'w', encoding='utf-8') as file:
+    file.writelines(cleaned_lines)
