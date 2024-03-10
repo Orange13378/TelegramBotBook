@@ -1,0 +1,13 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <!-- std-startup.xml -->
+
+    <!-- Category is an atomic AIML unit -->
+    <category>
+        <pattern>LOAD AIML BOOK</pattern>
+        <template>
+            <learn>book.aiml</learn>
+        </template>
+
+    </category>
+
+</aiml>
