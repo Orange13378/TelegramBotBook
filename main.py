@@ -278,7 +278,15 @@ async def voice_to_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         voice_file = await context.bot.get_file(file_id)
         await voice_file.download_to_drive(mp3_file_path)
 
-        process = subprocess.run(['ffmpeg', '-i', mp3_file_path, wav_file_path])
+        process = subprocess.run(['ffmpeg', '-y', '-i', mp3_file_path, wav_file_path],
+                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        if process.returncode != 0:
+            print(f'Произошла ошибка при конверсии. Код завершения: {process.returncode}')
+
+        # Вывод ошибок, если они есть
+        if process.stderr:
+            print(f'Ошибка: {process.stderr.decode("utf-8")}')
 
         # Используем SpeechRecognition для распознавания текста из файла
         recognizer = sr.Recognizer()
