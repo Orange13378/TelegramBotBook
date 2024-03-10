@@ -30,7 +30,7 @@ from sklearn.model_selection import train_test_split
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
-TOKEN: Final = '6509215674:AAFideSnqPhtqJKwgWglzKgWWuqF1ThIXHo'
+TOKEN: Final = 'key'
 current_directory = os.getcwd()
 
 kernel = aiml.Kernel()
