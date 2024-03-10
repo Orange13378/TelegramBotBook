@@ -48,7 +48,7 @@ def load_bot_config(file_path):
     return bot_config
 
 
-# Загрузка данных из нового файла
+# Загрузка данных из датасета по намерениям
 processed_bot_config_path = current_directory + "\\processed_bot_config.json"
 BOT_CONFIG = load_bot_config(processed_bot_config_path)
 
@@ -70,6 +70,7 @@ clf_ml = LinearSVC()
 # Обучаем нейронную сеть
 clf_ml.fit(X_train_tfidf, y_train)
 
+# 9 ГБ модель, обученная на 38000 элементах (вопрос-ответ), больше не позволяла оперативная память
 loaded_model = joblib.load('C:\\Users\\Muslim\\Downloads\\clear_dataset.pkl')
 
 #nltk.download('stopwords')
